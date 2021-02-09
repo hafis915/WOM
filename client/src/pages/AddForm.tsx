@@ -13,10 +13,17 @@ import {
     IonSelectOption
    } from '@ionic/react';
   import './Addform.css';
-  import React, {useRef} from 'react'
-//   import { addVictim } from '../config/firebase/index'
-  const Addform: React.FC = () => {
-  
+import React, {useRef, useEffect} from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { addData } from '../store/action'
+
+
+
+
+const Addform: React.FC = () => {
+    const dispatch = useDispatch()
+
+    // data
     const nikInput = useRef<HTMLIonInputElement>(null)
     const maidenNameInput = useRef<HTMLIonInputElement>(null)
     const nameInput = useRef<HTMLIonInputElement>(null)
@@ -25,9 +32,14 @@ import {
     const religionInput = useRef<HTMLIonSelectElement>(null)
     const genderInput = useRef<HTMLIonSelectElement>(null)
   
-  
+
+    // useEffect(() =>{
+    //   console.log("keke")
+    // }, [])
+
+
     const handleSubmitVictim = () => {
-      const nik = (nikInput.current?.value)
+      const NIK = (nikInput.current?.value)
       const name = (nameInput.current?.value)
       const maidenName = maidenNameInput.current?.value
       const birthDate= (birthDateInput.current?.value)
@@ -36,17 +48,18 @@ import {
       const gender = genderInput.current?.value
 
       const payload = {
-        nik,
+        NIK,
         name,
         maidenName,
         birthDate,
         maritalStatus,
         religion,
-        gender,
+        // gender,
 
       }
-      
       console.log(payload)
+      dispatch(addData(payload))
+      
     }
   
   
@@ -140,12 +153,12 @@ import {
             >
                 <IonLabel >Religion : </IonLabel>
                 <IonSelect interface="popover" ref={religionInput} >
-                    <IonSelectOption value={1}>Budha</IonSelectOption>
-                    <IonSelectOption value={2}>Hindu</IonSelectOption>
+                    <IonSelectOption value={5}>Budha</IonSelectOption>
+                    <IonSelectOption value={6}>Hindu</IonSelectOption>
                     <IonSelectOption value={3}>Islam</IonSelectOption>
-                    <IonSelectOption value={4}>Kristen Protestan</IonSelectOption>
-                    <IonSelectOption value={5}>Kristen Katholik</IonSelectOption>
-                    <IonSelectOption value={6}>Kongfucu</IonSelectOption>
+                    <IonSelectOption value={7}>Kristen Protestan</IonSelectOption>
+                    <IonSelectOption value={4}>Kristen Katholik</IonSelectOption>
+                    <IonSelectOption value={8}>Kongfucu</IonSelectOption>
                 </IonSelect>
             </IonItem>
             

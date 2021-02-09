@@ -97,8 +97,8 @@ def dukcapils(request):
         return JsonResponse(dukcapilsSerializer.data, safe=False)
     elif request.method == 'POST':
         dukcapilData = JSONParser().parse(request)
+        print(dukcapilData)
         dukcapilDataSerializer = DukcapilSerializer(data = dukcapilData)
-
         if dukcapilDataSerializer.is_valid():
             dukcapilDataSerializer.save()
             return JsonResponse(dukcapilDataSerializer.data, status= status.HTTP_201_CREATED)

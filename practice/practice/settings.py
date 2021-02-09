@@ -127,7 +127,7 @@ USE_L10N = True
 USE_TZ = True
 CORS_ORIGIN_ALLOW_ALL = False
 CORS_ORIGIN_WHITELIST = (
-    'http://localhost:8081',
+    'http://localhost:8100',
 )
 
 # Static files (CSS, JavaScript, Images)

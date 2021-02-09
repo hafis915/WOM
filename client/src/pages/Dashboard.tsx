@@ -11,19 +11,27 @@ import {
   } from '@ionic/react';
 import "./Dashboard.css";
 import Table from '../components/Table'
-
-
-import {chevronBackOutline} from "ionicons/icons"
+import { useSelector, useDispatch } from 'react-redux'
+import { getAllData } from '../store/action'
 import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
   
-  const Dashboard: React.FC = () => {
+const Dashboard: React.FC = () => {
     const history = useHistory()
+    const dispatch = useDispatch()
     const [searchText, setSearchText] = useState('');
+    const data = useSelector<any>(state => state)
     const [loading, setLoading] = useState<Boolean>(true)
     const [newData, setNewData] = useState<Array<Object>>([])
 
-  
+    useEffect(() =>{
+      console.log(data)
+      dispatch(getAllData())
+      console.log(data, "aftaer")
+      setLoading(false)
+    }, [])
+    
+    if(loading) return <h1>Loading</h1>
     return (
   
       <IonPage>
@@ -55,7 +63,9 @@ import { useHistory } from 'react-router-dom'
             onIonChange={e => setSearchText(e.detail.value!)}></IonSearchbar>
            
             <h4>Dukcapil Data</h4>
-           <Table></Table>
+           <Table
+           data = {data}
+           />
   
           </IonContent>
         </IonContent>

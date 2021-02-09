@@ -8,7 +8,7 @@ import {
   } from 'ionicons/icons';
 import { useHistory }  from 'react-router-dom'
 
-const BodyTable : React.FC = () => {
+const BodyTable : React.FC<{element : any}> = ({element}) => {
     const history = useHistory()
     const handleDelete = () => {
         console.log('delete')
@@ -21,12 +21,12 @@ const BodyTable : React.FC = () => {
     
     return (
         <IonRow className= 'body-table' >
-            <IonCol className="ion-align-center" >NIK</IonCol>
-            <IonCol className="ion-align-center" >Name</IonCol>
-            <IonCol className="ion-align-center" >Maiden Name</IonCol>
+            <IonCol className="ion-align-center" >{element.NIK}</IonCol>
+            <IonCol className="ion-align-center" >{element.name}</IonCol>
+            <IonCol className="ion-align-center" >{element.maidenName}</IonCol>
             <IonCol className="ion-align-center" >Gender</IonCol>
-            <IonCol className="ion-align-center" >Religion</IonCol>
-            <IonCol className="ion-align-center" >Marital Status</IonCol>
+            <IonCol className="ion-align-center" >{element.religion}</IonCol>
+            <IonCol className="ion-align-center" >{element.maritalStatus}</IonCol>
             <IonCol className="ion-align-center action" >
                 <IonIcon
                 onClick = {handleDelete}
