@@ -9,12 +9,15 @@ import {
   IonRouterOutlet 
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-
+import { Provider } from 'react-redux'
 // Pages
 import Home from './pages/Home';
 import Dashboard from './pages/Dashboard'
 import AddForm from './pages/AddForm'
 import Edit from './pages/Editpages'
+
+// store
+import store from './store'
 
 // Icon
 
@@ -43,6 +46,7 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 
 const App: React.FC = () => (
+  <Provider  store = {store}>
   <IonApp className = "Ion-App">
   <IonReactRouter>
       <IonTabs>
@@ -74,8 +78,8 @@ const App: React.FC = () => (
         </IonTabBar>
       </IonTabs>
   </IonReactRouter>
-
 </IonApp>
+</Provider>
 );
 
 export default App;
