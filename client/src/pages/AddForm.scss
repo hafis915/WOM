@@ -1,0 +1,61 @@
+.formContainer{
+    --ion-background-color: #393e46;
+    // --ion-background-color: yellowgreen;
+    // width: 100%;
+    // height: 100%;
+    .form{
+        // background-color: white;
+        height: 100%;
+        margin: 0;
+        h4{
+            color : #fecd1a;
+            font-weight: bold;
+            font-size: 30px;
+            text-align: center;
+        }
+        flex-direction: column;
+        margin: auto;
+        display: flex;
+        justify-content: center;
+        width: 80%;
+        // --ion-background-color: #222831;
+    }
+    .input{
+        --color: black ; 
+        border-radius: 10px;
+        --background : #fecd1a;
+        height: 100px;
+        margin-top: 5px;
+    }
+
+    .submitButton {
+        margin-top: 10px;
+        --background : #007074; 
+    }
+}
+.addVictimHeader{
+    --ion-background-color: #fecd1a;;
+    flex-direction: row;
+
+    .name {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .icon-back{
+
+            height: 30px;
+            width: 10%;
+        }
+        .title{
+            width: 90%;
+            text-align: center;
+            padding-left: 0;
+            margin-left: 0;  
+            font-size: 30px;
+            font-weight: bold;   
+            margin: auto;
+            margin-bottom: 20px;          
+        }
+    }
+}
+
