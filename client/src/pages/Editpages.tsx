@@ -66,7 +66,7 @@ const Edit: React.FC = () => {
       }
       console.log(payload)
       dispatch( editPersonalData(payload) )
-      history.push('/dashboard')
+      // history.push('/dashboard')
 
     }
     const onChangeHandler = (e:any) => {
@@ -224,6 +224,7 @@ const Edit: React.FC = () => {
   
   
             <IonButton
+            onClick = {() => history.push("/dashboard")}
             color= 'danger'
             >Cancel</IonButton>
   

@@ -1,0 +1,57 @@
+.dashBoardCard {
+  display: flex;
+  --background: #fecd1a;
+  --color: black ;
+  align-items: center;
+}
+.dashBoardCard .dashbordCardHeader {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.dashBoardCard .dashbordCardHeader img {
+  width: 30px;
+  margin-right: 30px;
+}
+.dashBoardCard .dashbordCardHeader h4 {
+  margin-top: 5px;
+  margin-right: 10px;
+  text-align: left;
+  margin-top: 0;
+  font-size: 15px;
+  color: black;
+}
+.dashBoardCard .dashbordCardHeader .action {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  margin-top: 0;
+}
+.dashBoardCard .dashbordCardHeader .action p {
+  color: black;
+  margin-bottom: 20px;
+  text-align: center;
+}
+.dashBoardCard .dashbordCardHeader .action .deleteCard {
+  height: 40px;
+  width: 40px;
+  cursor: pointer;
+}
+.dashBoardCard .dashbordCardHeader .action .deleteCard :hover {
+  color: blue;
+}
+.dashBoardCard .dashbordCardHeader .action .editCard {
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+}
+.dashBoardCard .dashbordCardHeader .action .nextCard {
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+}
+
+/*# sourceMappingURL=Card.css.map */
