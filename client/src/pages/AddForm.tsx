@@ -16,12 +16,14 @@ import {
 import React, {useRef, useEffect} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { addData } from '../store/action'
+import { useHistory } from 'react-router-dom'
 
 
 
 
 const Addform: React.FC = () => {
     const dispatch = useDispatch()
+    const history = useHistory()
 
     // data
     const nikInput = useRef<HTMLIonInputElement>(null)
@@ -32,12 +34,6 @@ const Addform: React.FC = () => {
     const religionInput = useRef<HTMLIonSelectElement>(null)
     const genderInput = useRef<HTMLIonSelectElement>(null)
   
-
-    // useEffect(() =>{
-    //   console.log("keke")
-    // }, [])
-
-
     const handleSubmitVictim = () => {
       const NIK = (nikInput.current?.value)
       const name = (nameInput.current?.value)
@@ -59,6 +55,7 @@ const Addform: React.FC = () => {
       }
       console.log(payload)
       dispatch(addData(payload))
+      history.push("/dashboard")
       
     }
   

@@ -7,7 +7,11 @@ import './Table.css'
 
 const Table: React.FC<{data : any}> = ({data}) => {
   const dukcapilData = data.dukcapilData
-
+  console.log(dukcapilData, 'ini di table')
+  if (dukcapilData.length === 0 ){
+    console.log("Masih loading", dukcapilData)
+    return <h1>Loading</h1>
+  }
   return (
   <IonContent>
     <IonGrid className= 'table-container'>

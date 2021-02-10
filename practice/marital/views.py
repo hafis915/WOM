@@ -120,5 +120,5 @@ def dukcapil(request, pk ):
         return JsonResponse(dukcapil_serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
     elif request.method == 'DELETE': 
         dukcapil.delete() 
-        return JsonResponse({'message': 'religion Status was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
+        return JsonResponse({'message': 'dukcapil data  was deleted successfully!'}, status=status.HTTP_204_NO_CONTENT)
         
