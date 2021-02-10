@@ -91,14 +91,10 @@ def religion(request, pk):
 # Dukcapil
 @api_view(['GET', 'POST'])
 def dukcapils(request):
-    print(request.GET["nik"], "<<<<<<<<<<<<<<<< ini params")
     filter = request.GET["nik"]
-    
-    print(request, "<<<<<<<<<<<<<<<<<<<< INI REQUES")
+    print("SAYA TERPANGGGGILLLL ")
     if request.method == 'GET':
         dukcapils = Dukcapil.objects.filter(NIK__icontains= filter)
-        filter_backEnd = (SearchFilter, OrderingFilter)
-        searchField = ('NIK', "NAME")
         dukcapilsSerializer = DukcapilSerializer(dukcapils, many = True)
         return JsonResponse(dukcapilsSerializer.data, safe=False)
     elif request.method == 'POST':
