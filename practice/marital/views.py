@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.http.response import JsonResponse
 from rest_framework.parsers import JSONParser 
 from rest_framework import status
-
+from rest_framework.filters import SearchFilter, OrderingFilter
 
 
 from marital.serializer import MaritalSerializer, ReligionSerializer, DukcapilSerializer
@@ -70,9 +70,9 @@ def religions(request):
 
 @api_view(['GET', 'PUT', 'DELETE'])
 def religion(request, pk):
-    # find tutorial by pk (id)
     religion = Religion.objects.get(pk=pk)
-
+    print(pk)
+    print(request,  "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< ini request")
     if request.method == 'GET': 
         religion_serializer = ReligionSerializer(religion) 
         return JsonResponse(religion_serializer.data)
@@ -91,8 +91,14 @@ def religion(request, pk):
 # Dukcapil
 @api_view(['GET', 'POST'])
 def dukcapils(request):
+    print(request.GET["nik"], "<<<<<<<<<<<<<<<< ini params")
+    filter = request.GET["nik"]
+    
+    print(request, "<<<<<<<<<<<<<<<<<<<< INI REQUES")
     if request.method == 'GET':
-        dukcapils = Dukcapil.objects.all()
+        dukcapils = Dukcapil.objects.filter(NIK__icontains= filter)
+        filter_backEnd = (SearchFilter, OrderingFilter)
+        searchField = ('NIK', "NAME")
         dukcapilsSerializer = DukcapilSerializer(dukcapils, many = True)
         return JsonResponse(dukcapilsSerializer.data, safe=False)
     elif request.method == 'POST':
@@ -103,13 +109,16 @@ def dukcapils(request):
             dukcapilDataSerializer.save()
             return JsonResponse(dukcapilDataSerializer.data, status= status.HTTP_201_CREATED)
         return JsonResponse(dukcapilDataSerializer.errors, status = status.HTTP_400_BAD_REQUEST)
+
+
+
 @api_view(['GET', 'PUT', 'DELETE'])
 def dukcapil(request, pk ):
     dukcapil = Dukcapil.objects.get(pk = pk)
 
-
     if request.method == 'GET':
         dukcapilSerializer = DukcapilSerializer(dukcapil)
+
         return JsonResponse(dukcapilSerializer.data, safe=False)
     elif request.method == 'PUT': 
         dukcapil_data = JSONParser().parse(request) 
