@@ -56,7 +56,7 @@ const App: React.FC = () => (
           <Route exact path="/" component= {Home} />
           <Route exact path="/dashboard"  component={Dashboard} />
           <Route exact path="/addData" component= {AddForm} />
-          <Route exact path="/edit" component = {Edit} />
+          <Route exact path="/edit/:id" component = {Edit} />
           <Route exact path="/" >
             <Redirect to="/dashboard" />
           </Route>

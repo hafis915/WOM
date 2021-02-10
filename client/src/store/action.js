@@ -59,3 +59,49 @@ export const deleteData = (id) => {
         } )
     }
 }
+
+export const searchDataById = (id) => {
+    console.log(id, "ini Id di edit")
+    return (dispatch, getState) =>{
+        fetch(`${url}/dukcapil/${id}`)
+        .then(res => res.json())
+        .then(data => {
+            console.log(data,"ini data edit")
+            dispatch({
+                type : 'getDataById',
+                data 
+            })
+        })
+    }
+}
+
+export const editPersonalData = (payload) =>{
+    const id = payload.id
+    const inputData = JSON.stringify(payload.data)
+    console.log(inputData , "ini di action edit")
+    return (dispatch, getState) => {
+        let currentData = JSON.parse(JSON.stringify(getState().dukcapilData))
+        let newData = currentData.map( (el) => {
+            console.log(id, el.id)
+            if(+el.id == id) {
+                console.log( "sama========================")
+                el = payload.data
+                return el
+            }
+            return el
+        })
+        console.log(newData, "ini nininiiiiiiii")
+        fetch(`${url}/dukcapil/${id}`,{
+            method : "PUT",
+            body : inputData
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data,"ini data edit")
+            dispatch({
+                type : 'editPersonalInfo',
+                data : newData
+            })
+        })
+    }
+}

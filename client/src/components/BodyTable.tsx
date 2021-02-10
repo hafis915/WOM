@@ -19,7 +19,12 @@ const BodyTable : React.FC<{element : any}> = ({element}) => {
     }
 
     const handleEdit = () => {
-        history.push('/edit')
+        const location = {
+            pathname: `edit/${element.id}`,
+            state: { element }
+        }
+        history.push(location)
+        // history.push(`edit/${element.id}`, {data : element})
     }
 
     

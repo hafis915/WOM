@@ -16,7 +16,7 @@ import {
 import React, {useRef, useEffect} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { addData } from '../store/action'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 
 
 
