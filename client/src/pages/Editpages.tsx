@@ -14,47 +14,70 @@ import {
     IonIcon
    } from '@ionic/react';
 import './Addform.css';
-import React, {useRef} from 'react'
+import React, {useRef, useEffect, useState} from 'react'
 import {chevronBackOutline} from "ionicons/icons"
-import { useHistory } from 'react-router-dom'
+import { useHistory, useParams , useLocation} from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { searchDataById, editPersonalData } from '../store/action'
 
 const Edit: React.FC = () => {
+    const {state} = useLocation<any>()
+    const {id} = useParams<any>()
     const history = useHistory()
-    const nikInput = useRef<HTMLIonInputElement>(null)
-    const maidenNameInput = useRef<HTMLIonInputElement>(null)
-    const nameInput = useRef<HTMLIonInputElement>(null)
-    const birthDateInput = useRef<HTMLIonInputElement>(null)
-    const maritalStatusInput = useRef<HTMLIonSelectElement>(null)
-    const religionInput = useRef<HTMLIonSelectElement>(null)
-    const genderInput = useRef<HTMLIonSelectElement>(null)
+    const dispatch = useDispatch()
+    const data = useSelector((state :any) => state.personalInfo)
+    const [currentInput, setCurrentInput ] = useState<any>({
+        NIK : 0,
+        name : 'Name',
+        maidenName : 'maidenName',
+        birthDate : 'birthDate',
+        maritalStatus : 'maritalStatus',
+        religion: 'religion',
+        gender : 'gender'
+    })
+
+    console.log(state , "ini location")
     
+    useEffect(() => {
+      console.log(data, "in use effect")
+      if(state?.element) {
+        console.log(data , 'di use effect')
+        setCurrentInput({
+          NIK : +state.element.NIK,
+          name : state.element.name,
+          birthDate : state.element.birthDate,
+          maidenName : state.element.maidenName,
+          religion : state.element.religion,
+          maritalStatus : state.element.maritalStatus
+      })
+        
+      }
+    }, [state])
+
     const handleBackHome =() => {
         history.push('/dashboard')
     }
   
     const handleSubmitVictim = () => {
-      const nik = (nikInput.current?.value)
-      const name = (nameInput.current?.value)
-      const maidenName = maidenNameInput.current?.value
-      const birthDate= (birthDateInput.current?.value)
-      const maritalStatus =(maritalStatusInput.current?.value)
-      const religion = (religionInput.current?.value)
-      const gender = genderInput.current?.value
-
+      console.log(currentInput)
       const payload = {
-        nik,
-        name,
-        maidenName,
-        birthDate,
-        maritalStatus,
-        religion,
-        gender,
-
+        id ,
+        data : currentInput
       }
-      
       console.log(payload)
+      dispatch( editPersonalData(payload) )
+      history.push('/dashboard')
+
     }
+    const onChangeHandler = (e:any) => {
+      const value = e.target.value;
+      const name = e.target.name
   
+      setCurrentInput({
+        ...currentInput,
+        [name]: value
+      })
+    }
   
     return (
       <IonPage>
@@ -92,8 +115,10 @@ const Edit: React.FC = () => {
             >
               <IonLabel position="stacked">NIK</IonLabel>
               <IonInput
-                ref={nikInput}
+                name = "NIK"
+                value = {currentInput.NIK}
                 type="number"
+                onIonChange={ e => onChangeHandler(e)}
                 placeholder="468464645645"
                ></IonInput>
             </IonItem>
@@ -104,7 +129,9 @@ const Edit: React.FC = () => {
             >
               <IonLabel position="stacked">Name</IonLabel>
               <IonInput
-                ref={nameInput}
+                name = "name"
+                value = {currentInput.name}
+                onIonChange = { e => onChangeHandler(e)}
                 type="text"
                 placeholder="John"
                ></IonInput>
@@ -115,7 +142,9 @@ const Edit: React.FC = () => {
             >
               <IonLabel position="stacked">Maiden Name</IonLabel>
               <IonInput
-                ref={maidenNameInput}
+                value = {currentInput.maidenName}
+                onIonChange = { e => onChangeHandler(e)}
+                name = "maidenName"
                 type="text"
                 placeholder="John"
                ></IonInput>
@@ -126,9 +155,10 @@ const Edit: React.FC = () => {
             >
               <IonLabel position="stacked">Birth Date</IonLabel>
               <IonInput 
-              ref={birthDateInput}
+              value = {currentInput.birthDate}
+              onIonChange = { e => onChangeHandler(e)}
+              name = "birthDate"
               type='date'
-            //   placeholder={"Makassar"}
               /> 
             </IonItem>
   
@@ -137,7 +167,14 @@ const Edit: React.FC = () => {
             
             >
                 <IonLabel>Marital Status : </IonLabel>
-                <IonSelect interface="popover" ref={maritalStatusInput}>
+                <IonSelect 
+                interface="popover" 
+                value = {currentInput.maritalStatus}
+                onIonChange = { e => onChangeHandler(e)}
+                name = "maritalStatus"
+
+
+                >
                     <IonSelectOption value={1}>Single</IonSelectOption>
                     <IonSelectOption value={2}>Widow</IonSelectOption>
                     <IonSelectOption value={3}>Widower</IonSelectOption>
@@ -149,7 +186,13 @@ const Edit: React.FC = () => {
             className="input"
             >
                 <IonLabel >Religion : </IonLabel>
-                <IonSelect interface="popover" ref={religionInput} >
+                <IonSelect 
+                interface="popover" 
+                value = {currentInput.religion}
+                onIonChange = { e => onChangeHandler(e)}
+                name = "religion"
+
+                >
                     <IonSelectOption value={1}>Budha</IonSelectOption>
                     <IonSelectOption value={2}>Hindu</IonSelectOption>
                     <IonSelectOption value={3}>Islam</IonSelectOption>
@@ -166,7 +209,8 @@ const Edit: React.FC = () => {
             >
             <IonLabel >Gender</IonLabel>
               <IonSelect
-              ref={genderInput}
+                // value = {currentInput.religion}
+                // ref={genderInput}
               >
                 <IonSelectOption value="male">Male</IonSelectOption>
                 <IonSelectOption value="female">Female</IonSelectOption>

@@ -27,6 +27,7 @@ class DukcapilSerializer(serializers.ModelSerializer):
         # religion = ReligionSerializer(read_only = True, many = True)
         model = Dukcapil
         fields = (
+            'id',
             'NIK',
             'name',
             'maidenName',

@@ -7,15 +7,24 @@ import {
     pencilOutline, 
   } from 'ionicons/icons';
 import { useHistory }  from 'react-router-dom'
+import {useDispatch}  from 'react-redux'
+import { deleteData } from '../store/action'
 
 const BodyTable : React.FC<{element : any}> = ({element}) => {
     const history = useHistory()
+    const dispatch = useDispatch()
     const handleDelete = () => {
-        console.log('delete')
+        console.log(element.id)
+        dispatch(deleteData(element.id))
     }
 
     const handleEdit = () => {
-        history.push('/edit')
+        const location = {
+            pathname: `edit/${element.id}`,
+            state: { element }
+        }
+        history.push(location)
+        // history.push(`edit/${element.id}`, {data : element})
     }
 
     
